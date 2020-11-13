@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>[macOS] iCloud로 백업한 타임머신 데이터 복구 방법 | &#60;/&#62; shoveling</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="[macOS] iCloud로 백업한 타임머신 데이터 복구 방법" />
+<meta name="author" content="dayrain" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="서문 macOS에는 시스템 전체의 백업을 쉽게 해주는 타임머신이라는 좋은 기능이 존재합니다. 다만 자동 백업으로 가만히 놔두면 용량을 꽤 잡아먹는데, 어떤 분이 감사하게도 타임머신을 클라우드 서비스에 하는 방법을 번역해 공유하셔서 백업을 안전하게 할 수 있었습니다. 하지만 뭔가 설정이 꼬여서 실제로 복구모드에서 macOS를 클라우드의 타임머신 백업으로 복구할 일이 있었을때 꽤 헤맸는데, 까먹지 않게 저장할 겸 해서 그 방법을 공유하고자 합니다." />
+<meta property="og:description" content="서문 macOS에는 시스템 전체의 백업을 쉽게 해주는 타임머신이라는 좋은 기능이 존재합니다. 다만 자동 백업으로 가만히 놔두면 용량을 꽤 잡아먹는데, 어떤 분이 감사하게도 타임머신을 클라우드 서비스에 하는 방법을 번역해 공유하셔서 백업을 안전하게 할 수 있었습니다. 하지만 뭔가 설정이 꼬여서 실제로 복구모드에서 macOS를 클라우드의 타임머신 백업으로 복구할 일이 있었을때 꽤 헤맸는데, 까먹지 않게 저장할 겸 해서 그 방법을 공유하고자 합니다." />
+<link rel="canonical" href="https://blackwaterbread.github.io/2020-11-13/1" />
+<meta property="og:url" content="https://blackwaterbread.github.io/2020-11-13/1" />
+<meta property="og:site_name" content="&#60;/&#62; shoveling" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-13T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[macOS] iCloud로 백업한 타임머신 데이터 복구 방법" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://blackwaterbread.github.io/2020-11-13/1"},"@type":"BlogPosting","url":"https://blackwaterbread.github.io/2020-11-13/1","author":{"@type":"Person","name":"dayrain"},"headline":"[macOS] iCloud로 백업한 타임머신 데이터 복구 방법","dateModified":"2020-11-13T00:00:00+09:00","datePublished":"2020-11-13T00:00:00+09:00","description":"서문 macOS에는 시스템 전체의 백업을 쉽게 해주는 타임머신이라는 좋은 기능이 존재합니다. 다만 자동 백업으로 가만히 놔두면 용량을 꽤 잡아먹는데, 어떤 분이 감사하게도 타임머신을 클라우드 서비스에 하는 방법을 번역해 공유하셔서 백업을 안전하게 할 수 있었습니다. 하지만 뭔가 설정이 꼬여서 실제로 복구모드에서 macOS를 클라우드의 타임머신 백업으로 복구할 일이 있었을때 꽤 헤맸는데, 까먹지 않게 저장할 겸 해서 그 방법을 공유하고자 합니다.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://blackwaterbread.github.io/feed.xml" title="&amp;#60;&amp;#47;&amp;#62; shoveling" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">&#60;&#47;&#62; shoveling</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        dayrain
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2020-11-13 00:00:00 +0900">November 13, 2020</time>
+    
+  </div>
+
+  <h1 class="post-title">[macOS] iCloud로 백업한 타임머신 데이터 복구 방법</h1>
+  <div class="post-line"></div>
+
+  <h1 id="서문">서문</h1>
+<p>macOS에는 시스템 전체의 백업을 쉽게 해주는 타임머신이라는 좋은 기능이 존재합니다. 다만 자동 백업으로 가만히 놔두면 용량을 꽤 잡아먹는데, 어떤 분이 감사하게도 <a href="https://williamjeong2.github.io/blog/2-how-to-save-apple-time-machine-mackups-to-cloud-services/">타임머신을 클라우드 서비스에 하는 방법</a>을 번역해 공유하셔서 백업을 안전하게 할 수 있었습니다. 하지만 뭔가 설정이 꼬여서 실제로 복구모드에서 macOS를 클라우드의 타임머신 백업으로 복구할 일이 있었을때 꽤 헤맸는데, 까먹지 않게 저장할 겸 해서 그 방법을 공유하고자 합니다.</p>
+
+<h1 id="방법">방법</h1>
+<ol>
+  <li>
+    <p>우선 macOS를 재시동 한 뒤 시동음이 들리면 Command + Option + R 키를 누르고 있는다.</p>
+  </li>
+  <li>
+    <p>복구 모드에 진입하면 상단 메뉴의 유틸리티 - 터미널 메뉴를 눌러 터미널을 실행한다.</p>
+  </li>
+  <li>
+    <p>터미널에 아래 명령어 중간의 your-account 부분을 본인 계정명으로 변경한 후 입력 <br />
+$ cd /Volumes/Macintosh\ HD/Users/<strong>{your-account}</strong>/Library/Mobile\ Documents/com~apple~CloudDocs</p>
+  </li>
+  <li>
+    <p>ls 명령으로 해당 디렉토리 내의 sparsebundle 파일의 파일명을 확인</p>
+  </li>
+  <li>
+    <p>터미널에 아래 명령어의 your-bundle-name 부분을 확인했던 파일명으로 변경한 후 입력 <br />
+$ hdid <strong>{your-bundle-name}</strong>.sparsebundle</p>
+  </li>
+  <li>
+    <p>iCloud에 볼륨을 새로 만들 때 암호화를 진행하였다면 여기서 해당 암호를 요구하니 입력 <br />
+<strong>(잊어버렸으면 복구 못합니다..)</strong></p>
+  </li>
+  <li>
+    <p>성공적으로 진행 되었다면 /Volumes 경로 아래 정상적으로 마운트가 되었을 것입니다.</p>
+  </li>
+  <li>
+    <p>다시 macOS 복구 유틸리티로 돌아와서 Time Machine으로부터 백업 옵션을 선택</p>
+  </li>
+  <li>
+    <p>로컬 디스크에 복구 지점이 생성 되어 있음.</p>
+  </li>
+  <li>
+    <p>원하는 복구 시점을 선택해 복구하시면 됩니다.</p>
+  </li>
+</ol>
+
+</div>
+
+
+  <!-- Start disqus -->
+<script src="/assets/js/disqusLoader.js" /></script>
+<div id="disqus_thread"><h3>Discussion and feedback</h3></div>
+<div class="disqus"></div>
+<script>
+    disqusLoader('.disqus', {
+        scriptUrl: 'https://jekyll-tale.disqus.com/embed.js'
+    });
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- End disqus -->
+
+
+<div class="pagination">
+  
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2020-11-13 16:57:32 +0900">2020</time> dayrain. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>
